@@ -1,0 +1,17 @@
+<div id ="profiles">
+    <center><h1>Hello {{user[0].FIRST_NAME}}  {{user[0].LAST_NAME}}</h1></center>
+    
+
+    <!--<profile-info user-id="{{user[0].USER_ID}}"></profile-info>-->
+    
+    <p>User ID: {{user[0].USER_ID}}</p>
+    <p>Email: {{user[0].EMAIL}}</p>
+    <p>Date and Time Joined:  {{user[0].DATE_JOINED}}</p>
+    
+    <ul>
+        <li >
+            <profile-feed user-id = "{{user[0].USER_ID}}"></profile-feed>
+        </li>
+    </ul>
+</div>
+

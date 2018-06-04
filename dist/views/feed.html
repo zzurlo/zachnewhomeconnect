@@ -1,0 +1,49 @@
+<table id = "postBar">
+    <tr>
+        <td>Post: </td>
+        <td><input ng-model="postContent" size = "100" type="text" name="post" placeholder= "Enter a post"/></td> <!-- ng-model postContent puts the data that is typed in the pstContent variable when submit is pushed -->
+    </tr>
+    <tr>
+        <td>
+            <input type="submit" name="submitPost" ng-click="createPost();" value = "Submit"/> <!-- ng-click= createPost() calls the createPost method in the controller which calls the method in the model -->
+        </td>
+    </tr>
+</table>
+
+
+<div id = "userPosts" ng-init="getAllPosts(); livePostsAndComments();"> <!-- ng-init getAllPosts calls the getAllPosts method in the controller -->
+    <ul id = "posts">
+        <li ng-repeat="post in posts"> <!-- ng-repeat "post in posts" prints out all of the strings in the array called posts -->
+           
+            <!--<profile-info user-id="{{post['USER_ID']}}"></profile-info>-->
+            <a ng-href="#/profile/{{post['USER_ID']}}/">{{post['EMAIL']}}</a> - {{post['POST']}} Likes: {{post['LIKES']}}
+            
+            <!-- Like a post -->
+            <!--<input type="submit" name="submitLike" ng-click="likePost(post['USER_POST_ID']);" value = "Like"/> -->
+            <input type="submit" name="submitLike" ng-show = "!post.IS_LIKED" ng-click="likePost(post);" value = "Like"/> 
+            
+            <!-- Unlike a post -->
+            <input type="submit" name="submitUnlike" ng-show = "post.IS_LIKED" ng-click="unlikePost(post);" value = "Unlike"/> 
+            
+             <!-- Delete a post -->
+            <input type="submit" name="submitDelete" ng-click="deletePost(post['USER_POST_ID']);" value = "Delete"/>
+            
+            
+            
+            <!-- Update a post -->
+            <a href="javascript:;" ng-click="showEdit = true;">Edit Post</a>
+            <p ng-show = "showEdit">Content</p>
+            <input type = "text" name = "updatepostcontent" ng-show="showEdit" ng-model="updatedContent" placeholder = "Enter an Update"/>
+            <input type="submit" name="submitUpdate" ng-show = "showEdit" ng-click="updatePost(updatedContent, post['USER_POST_ID']);" value = "Update"/>  
+            
+            
+            <!-- Comment on a post -->
+            <input id = "commentBar" type = "text" name = "commentonpost"  ng-model = "commentedPost" placeholder = "Enter a comment"/>
+            <input type = "submit" name = "submitComment"  ng-click = "commentOnPost(post, commentedPost);" value = "Comment"/>
+            
+            <!-- Comments -->
+            <comments id = "comments" comments = "post.COMMENTS" ></comments>
+           
+        </li>    
+    </ul>
+</div>
